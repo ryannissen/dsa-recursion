@@ -16,6 +16,13 @@ function longest(words) {
   } else {
     return longest(words.slice(1));
   }
+
+  // if (words.length === 0) return 0;
+  // if (words.length === 1) return words[0].length;
+
+  // if (words[0].length > longest(words.slice(1))) {
+  //   return words[0].length;
+  // }
 }
 
 /** everyOther: return a string with every other letter. */
@@ -48,7 +55,7 @@ function findIndex(arr, val) {
   if (arr.length === 0) return -1;
 
   const findIdx = findIndex(arr.slice(1), val);
-  
+
   if (findIdx === -1) {
     return -1;
   } else return 1 + findIdx;
@@ -56,16 +63,36 @@ function findIndex(arr, val) {
 
 /** revString: return a copy of a string, but in reverse. */
 
-function revString(str) {}
+function revString(str) {
+  if (str.length === 1) return str[0];
+
+  //let letter = str[0] + revString(str.slice(1))
+  return revString(str.slice(1)) + str[0]
+ }
 
 /** gatherStrings: given an object, return an array of all of the string values. */
 
-function gatherStrings(obj) {}
+function gatherStrings(obj) {
+  if (Object.keys(obj).length === 0) return [];
+
+  for (let key in obj) {
+    if (typeof(obj[key]) === "string") {
+      const stringValue = obj[key]
+      delete obj[key]
+      return [stringValue, ...gatherStrings(obj)]
+    } else if (typeof(obj[key]) === "object") {
+      return gatherStrings(obj[key]);
+    } else {
+      delete obj[key]
+      return gatherStrings(obj);
+    }
+  }
+ }
 
 /** binarySearch: given a sorted array of numbers, and a value,
  * return the index of that value (or -1 if val is not present). */
 
-function binarySearch(arr, val) {}
+function binarySearch(arr, val) { }
 
 module.exports = {
   product,
